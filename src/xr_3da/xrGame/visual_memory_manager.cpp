@@ -28,10 +28,10 @@
 #include "client_spawn_manager.h"
 #include "memory_manager.h"
 
-#ifndef MASTER_GOLD
+//#ifndef MASTER_GOLD
 #	include "clsid_game.h"
 #	include "ai_debug.h"
-#endif // MASTER_GOLD
+//#endif // MASTER_GOLD
 
 struct SRemoveOfflinePredicate {
 	bool		operator()						(const CVisibleObject &object) const
@@ -371,10 +371,10 @@ bool CVisualMemoryManager::visible				(const CGameObject *game_object, float tim
 
 void CVisualMemoryManager::add_visible_object	(const CObject *object, float time_delta, bool fictitious)
 {
-#ifndef MASTER_GOLD
+//#ifndef MASTER_GOLD
 	if (object && (object->CLS_ID == CLSID_OBJECT_ACTOR) && psAI_Flags.test(aiIgnoreActor))
 		return;
-#endif // MASTER_GOLD
+//#endif // MASTER_GOLD
 
 	xr_vector<CVisibleObject>::iterator	J;
 	const CGameObject *game_object;
@@ -425,10 +425,10 @@ void CVisualMemoryManager::add_visible_object	(const CObject *object, float time
 
 void CVisualMemoryManager::add_visible_object	(const CVisibleObject visible_object)
 {
-#ifndef MASTER_GOLD
+//#ifndef MASTER_GOLD
 	if (visible_object.m_object && (visible_object.m_object->CLS_ID == CLSID_OBJECT_ACTOR) && psAI_Flags.test(aiIgnoreActor))
 		return;
-#endif // MASTER_GOLD
+//#endif // MASTER_GOLD
 
 	VERIFY										(m_objects);
 	xr_vector<CVisibleObject>::iterator			J = std::find(m_objects->begin(),m_objects->end(),object_id(visible_object.m_object));
