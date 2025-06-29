@@ -1201,7 +1201,7 @@ void CActor::shedule_Update	(u32 DT)
 //	UpdateSleep									();
 
 	//для свойст артефактов, находящихся на поясе
-	UpdateArtefactsOnBelt						();
+	UpdateArtefactsOnBeltAndOutfit						();
 	m_pPhysics_support->in_shedule_Update		(DT);
 	Check_for_AutoPickUp						();
 };
@@ -1498,7 +1498,7 @@ void CActor::MoveArtefactBelt(const CArtefact* artefact, bool on_belt)
 
 #define ARTEFACTS_UPDATE_TIME 0.100f
 
-void CActor::UpdateArtefactsOnBelt()
+void CActor::UpdateArtefactsOnBeltAndOutfit()
 {
 	static float update_time = 0;
 
@@ -1524,9 +1524,18 @@ void CActor::UpdateArtefactsOnBelt()
 			conditions().ChangeBleeding			(artefact->m_fBleedingRestoreSpeed*f_update_time);
 			conditions().ChangeHealth			(artefact->m_fHealthRestoreSpeed*f_update_time);
 			conditions().ChangePower			(artefact->m_fPowerRestoreSpeed*f_update_time);
-//			conditions().ChangeSatiety			(artefact->m_fSatietyRestoreSpeed*f_update_time);
+			conditions().ChangeSatiety			(artefact->m_fSatietyRestoreSpeed*f_update_time);
 			conditions().ChangeRadiation		(artefact->m_fRadiationRestoreSpeed*f_update_time);
 		}
+	}
+	CCustomOutfit* outfit = GetOutfit();
+	if (outfit)
+	{
+		conditions().ChangeBleeding((outfit->m_fBleedingRestoreSpeed) * f_update_time);
+		conditions().ChangeHealth(outfit->m_fHealthRestoreSpeed * f_update_time);
+		conditions().ChangePower(outfit->m_fPowerRestoreSpeed * f_update_time);
+		conditions().ChangeSatiety(outfit->m_fSatietyRestoreSpeed * f_update_time);
+		conditions().ChangeRadiation(outfit->m_fRadiationRestoreSpeed * f_update_time);
 	}
 }
 
