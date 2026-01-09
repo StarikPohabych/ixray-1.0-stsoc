@@ -300,6 +300,7 @@
 
 		<rank>730</rank>
 		<reputation>96</reputation>
+		<money min="100000" max="110000" infinitive="1"/> 
 
 		<visual>actors\svoboda\stalker_sv_balon_1</visual>
 		<supplies>
